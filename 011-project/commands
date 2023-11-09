@@ -1,0 +1,6 @@
+docker-compose rm
+docker volume prune -f
+docker rmi -f ＄(docker images -qa)
+
+docker system prune -af --volumes
+

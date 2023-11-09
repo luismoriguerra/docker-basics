@@ -1,0 +1,27 @@
+docker system df
+
+docker container ls -a
+
+docker image ls -a
+
+docker volume ls
+
+docker network ls
+
+docker container stop adminer mysql
+
+docker system prune
+
+docker system prune -a
+
+docker exec mysql /usr/bin/mysqldump -u root -pmysecret mydb > backup.sql
+
+docker volume ls
+
+docker volume rm <name>
+
+docker volume prune
+y
+#full clean
+docker system prune -a --volumes
+y

@@ -1,0 +1,26 @@
+
+docker-compose up
+
+go to http://[::]:8080/?server=mysql
+
+# In this case, MySQL would not be accessible to the host, although Adminer could still communicate with mysql:3306 on the internal network.
+# If you specify a single port value in docker-compose.yml, it is only exposed within the Docker network, e.g.,
+# ports:
+#   - "3306"
+
+This specifies a level of compatibility. The -f option allows you to specify an alternative configuration filename, e.g.,
+
+docker-compose -f ./my-config.yml up
+
+Docker Compose can be run as a background service or in detached mode using -d. This may be practical on a live server where foreground logging is not required:
+
+docker-compose up -d
+
+and stopped using:
+
+docker-compose down
+
+Note that
+$ docker-compose stop
+stops containers without removing them. They can then be restarted with 
+$ docker-compose start.

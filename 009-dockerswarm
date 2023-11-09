@@ -1,0 +1,30 @@
+docker system info
+
+docker swarm init
+
+docker swarm join --token SWMTKN-1-2iulo9gk3bfwxicvi5izv5eugdao20fcyg7vxo3k238yvmtrhd-7x33l99ywdfwf8ilk7sfenuts 192.168.65.3:2377
+
+# To view all nodes within your swarm use the command below. A single development machine will display something similar to:
+docker node ls
+
+docker pull educative1/nodehello
+
+docker service create --name nodehello -p 3000:3000 \
+  educative1/nodehello
+
+docker service ls
+
+docker container ls
+
+docker service scale nodehello=3
+
+docker container ls
+
+docker service create --name nodehello -p 3000:3000 --replicas=3 \
+  educative1/nodehello
+
+docker service rm nodehello
+
+docker swarm leave
+
+docker swarm leave --force

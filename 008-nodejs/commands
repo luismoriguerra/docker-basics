@@ -1,0 +1,32 @@
+docker image build -t nodehello .
+
+docker image ls
+
+docker image ls -a
+
+docker system df
+
+docker run -it --rm --name nodehello -p 3000:3000 nodehello
+
+http://localhost:3000/
+
+
+docker-compose up
+
+# Now run the below command, it explicitly builds the Dockerfile again:
+docker-compose up --build
+
+docker run -it --rm \
+  --name nodehello \
+  -p 3000:3000 \
+  -p 9229:9229 \
+  -e NODE_ENV=development \
+  -v $PWD:/home/node/app \
+  --entrypoint '/bin/sh' \
+  nodehello \
+  -c 'npm install && npm run debug'
+
+  docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nodehello
+
+
+docker container commit

@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecret
+    volumes:
+      - mysqldata:/var/lib/mysql
+    # In this case, MySQL would not be accessible to the host, although Adminer could still communicate with mysql:3306 on the internal network.
+    # If you specify a single port value in docker-compose.yml, it is only exposed within the Docker network, e.g.,
+    # ports:
+    #   - "3306"
+    ports:
+      - "3000:3306"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+volumes:
+  mysqldata:
+
+networks:
+  mysqlnet:

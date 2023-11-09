@@ -1,0 +1,47 @@
+docker stats
+
+
+docker network create --driver bridge <network_name>
+
+docker network create --driver bridge mynet
+
+docker run \
+  -d --rm --name mysql \
+  -p 3306:3306 \
+  --mount "src=mysqldata,target=/var/lib/mysql" \
+  -e MYSQL_ROOT_PASSWORD=mysecret \
+  --net mynet \
+  mysql
+
+
+docker network ls
+
+
+docker network prune
+
+docker system prune -a --volumes
+y
+
+
+docker-compose up
+
+docker-compose up --build
+
+docker-compose build
+docker-compose up
+
+docker-compose -f ./my-config.yml up
+
+#Start as background service:
+docker-compose up -d
+
+docker-compose logs
+
+docker-compose restart
+
+docker-compose rm
+
+#Stop containers without removing them:
+docker-compose stop
+#Stop and remove running containers, images, volumes, and networks:
+docker-compose down

@@ -1,0 +1,24 @@
+docker-compose up 
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' wordpress
+-- 172.18.0.3
+
+http://172.18.0.3:80
+
+http://172.18.0.3/wp-admin
+
+http://localhost/wp-admin/
+
+
+docker-compose down
+
+docker-compose up
+
+-- after adding adminer
+http://localhost:3000/?server=mysql&username=wpuser&db=wpdb
+
+## open
+code /etc/hosts
+## add line
+127.0.0.1    dev.wordpress
+

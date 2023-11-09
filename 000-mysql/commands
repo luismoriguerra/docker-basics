@@ -1,0 +1,48 @@
+docker run \
+  -it --rm --name mysql \
+  -p 3306:3306 \
+  --mount "src=mysqldata,target=/var/lib/mysql" \
+  -e MYSQL_ROOT_PASSWORD=mysecret \
+  mysql
+
+it: interactive terminal
+rm: remove container when it exits
+p: port mapping (host:container)
+mount: mount a volume (host:container) and src is the volume name in docker volume ls and target is the path in the container in which the volume will be mounted
+```
+The docker run command above stores all database data in a Docker volume named mysqldata. This retains data between restarts, including the first root password you set.
+
+If you alter the run command to use a different password on a subsequent launch (e.g., -e MYSQL_ROOT_PASSWORD=NewSecret), it will be ignored. To change the root password, you can either issue a MySQL ALTER USER command using a MySQL client or, more drastically, delete the Docker volume and initialize the database again.
+```
+
+2nd terminal 
+-- mysql client in docker
+
+docker run \
+  -it --rm --name adminer \
+  -p 8080:8080 \
+  adminer
+
+
+docker inspect mysql 
+ --                     "IPAddress": "172.17.0.2",
+
+docker inspect \
+  -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  mysql
+
+The other options for filling up server are:
+Enter host.docker.internal.
+Docker Desktop routes this domain to your PC’s network IP address, but it may not be available on all systems.
+Use your actual network IP address.
+This can be obtained with the ifconfig command on macOS and Linux or ipconfig on Windows.
+
+# Connect to a container shell#
+docker exec -it mysql bash
+
+mysql -u root -pmysecret
+
+mysql -u root -p
+
+show databases;
+
